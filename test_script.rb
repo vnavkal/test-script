@@ -1,8 +1,4 @@
-Upstart.joins(:home_ownerships)
-17685
-
-
-u = Upstart.last
+u = Upstart.find(17649)
 manager = UpstartNetwork::AutomaticLoanPricingManager.new(u)
 manager.pre_price
 t = FundingTermSetTemplate.all.find { |t| t.contract_type == UpstartNetwork::LoanTerms::CONTRACT_TYPE }
