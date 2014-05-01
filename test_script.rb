@@ -573,44 +573,7 @@ l.raising_amount = 10000
 l.use_of_funds = UpstartNetwork::UseOfFunds::CODING_BOOTCAMP
 
 l.student_sat_1600 = nil
-l.school_sat_1600 = 1113
-l.college_gpa_4 = nil
-l.undergrad_bb_major = :humanities
-l.college_grad_year = 2007
-
-job1 = UpstartNetwork::LoanPricing::Job.new(57500.0 / 12.0, Date.new(2009, 8, 1), nil, true)
-l.jobs = [job1]
-
-l.number_of_dependents = 0
-l.total_monthly_debt_obligations = 180
-l.home_ownership.monthly_price = 180.0
-l.home_ownership.ownership_type = "mortgage"
-
-l.credit_score = 770
-l.credit_history_month = 15 * 12
-l.delinquencies_in_2_years = 0
-l.open_credit_lines = 15
-l.total_credit_lines_count = 16
-l.revolving_credit_accounts_balance = 9715
-l.revolving_credit_utilized_percent = 7
-l.recent_credit_inquiries = 3
-
-l.deferral_months = 0
-
-m = UpstartNetwork::LoanPricing::LoanModel.new(l)
-m.get_interest_rate(l.raising_amount)
-
-# Candidate 14: 17997
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
-
-c = CodingBootcamp.where(use_for_pricing: true).first
-l.coding_bootcamp = c
-
-l.raising_amount = 10000
-l.use_of_funds = UpstartNetwork::UseOfFunds::CODING_BOOTCAMP
-
-l.student_sat_1600 = nil
-l.school_sat_1600 = 972
+l.school_sat_1600 = 0.5 * (1350 + 1124)
 l.college_gpa_4 = nil
 l.undergrad_bb_major = :history
 l.college_grad_year = 2007
@@ -623,7 +586,7 @@ l.total_monthly_debt_obligations = 180
 l.home_ownership.monthly_price = 900.0
 l.home_ownership.ownership_type = "mortgage"
 
-l.credit_score = 760
+l.credit_score = 764
 l.credit_history_month = 185
 l.delinquencies_in_2_years = 0
 l.open_credit_lines = 15
@@ -709,6 +672,84 @@ l.total_credit_lines_count = 8
 l.revolving_credit_accounts_balance = 17310
 l.revolving_credit_utilized_percent = 34
 l.recent_credit_inquiries = 4
+
+l.deferral_months = 0
+
+m = UpstartNetwork::LoanPricing::LoanModel.new(l)
+i = m.get_interest_rate(l.raising_amount)
+{'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
+
+# Candidate 16: 17099
+l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+
+c = CodingBootcamp.where(use_for_pricing: true).first
+l.coding_bootcamp = c
+
+l.raising_amount = 22000
+l.use_of_funds = UpstartNetwork::UseOfFunds::CODING_BOOTCAMP
+
+l.student_sat_1600 = nil
+l.school_sat_1600 = 1157.0
+l.college_gpa_4 = nil
+l.undergrad_bb_major = :humanities
+l.college_grad_year = 2001
+
+job1 = UpstartNetwork::LoanPricing::Job.new(13200.0 / 12.0, Date.new(2013, 5, 1), nil, true)
+job2 = UpstartNetwork::LoanPricing::Job.new(7756.0 / 12.0, Date.new(2014, 1, 1), nil, true)
+job3 = UpstartNetwork::LoanPricing::Job.new(16800.0 / 12.0, Date.new(2007, 9, 1), Date.new(2012, 12, 1), false)
+l.jobs = [job1, job2, job3]
+
+l.number_of_dependents = 0
+l.total_monthly_debt_obligations = 611
+l.home_ownership.monthly_price = 1125.0
+l.home_ownership.ownership_type = "rent"
+
+l.credit_score = 710
+l.credit_history_month = 16 * 12
+l.delinquencies_in_2_years = 1
+l.open_credit_lines = 7
+l.total_credit_lines_count = 9
+l.revolving_credit_accounts_balance = 6981
+l.revolving_credit_utilized_percent = 16
+l.recent_credit_inquiries = 0
+
+l.deferral_months = 0
+
+m = UpstartNetwork::LoanPricing::LoanModel.new(l)
+i = m.get_interest_rate(l.raising_amount)
+{'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
+
+# Candidate 17: 17967
+l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+
+c = CodingBootcamp.where(use_for_pricing: true).first
+l.coding_bootcamp = nil
+
+l.raising_amount = 5000
+l.use_of_funds = UpstartNetwork::UseOfFunds::LARGE_PURCHASE
+
+l.student_sat_1600 = nil
+l.school_sat_1600 = 1086.0
+l.college_gpa_4 = 3.45
+l.undergrad_bb_major = :engineering
+l.college_grad_year = 2013
+
+job1 = UpstartNetwork::LoanPricing::Job.new(57996.0 / 12.0, Date.new(2013, 6, 1), nil, true)
+l.jobs = [job1]
+
+l.number_of_dependents = 0
+l.total_monthly_debt_obligations = 433
+l.home_ownership.monthly_price = 800.0
+l.home_ownership.ownership_type = "rent"
+
+l.credit_score = 690
+l.credit_history_month = 60
+l.delinquencies_in_2_years = 0
+l.open_credit_lines = 4
+l.total_credit_lines_count = 4
+l.revolving_credit_accounts_balance = 4072
+l.revolving_credit_utilized_percent = 33
+l.recent_credit_inquiries = 1
 
 l.deferral_months = 0
 
