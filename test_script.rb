@@ -716,6 +716,82 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
+# Candidate 17: 18143
+l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+
+c = CodingBootcamp.where(use_for_pricing: true).first
+l.coding_bootcamp = c
+
+l.raising_amount = 25000
+l.use_of_funds = UpstartNetwork::UseOfFunds::CODING_BOOTCAMP
+
+l.student_sat_1600 = nil
+l.school_sat_1600 = 1343
+l.college_gpa_4 = nil
+l.undergrad_bb_major = :'social sciences'
+l.college_grad_year = 2010
+
+job1 = UpstartNetwork::LoanPricing::Job.new(7000.0, Date.new(2013, 5, 1), nil, true)
+l.jobs = [job1]
+
+l.number_of_dependents = 0
+l.total_monthly_debt_obligations = 111
+l.home_ownership.monthly_price = 1500.0
+l.home_ownership.ownership_type = "rent"
+
+l.credit_score = 683
+l.credit_history_month = 96
+l.delinquencies_in_2_years = 0
+l.open_credit_lines = 18
+l.total_credit_lines_count = 25
+l.revolving_credit_accounts_balance = 19960
+l.revolving_credit_utilized_percent = 14
+l.recent_credit_inquiries = 4
+
+l.deferral_months = 0
+
+m = UpstartNetwork::LoanPricing::LoanModel.new(l)
+i = m.get_interest_rate(l.raising_amount)
+{'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
+
+# Candidate 18: 18008
+l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+
+c = CodingBootcamp.where(use_for_pricing: true).first
+l.coding_bootcamp = c
+
+l.raising_amount = 16000
+l.use_of_funds = UpstartNetwork::UseOfFunds::CODING_BOOTCAMP
+
+l.student_sat_1600 = nil
+l.school_sat_1600 = nil
+l.college_gpa_4 = nil
+l.undergrad_bb_major = nil
+l.college_grad_year = nil
+
+job1 = UpstartNetwork::LoanPricing::Job.new(7000.0, Date.new(2013, 5, 1), nil, true)
+l.jobs = []
+
+l.number_of_dependents = 2
+l.total_monthly_debt_obligations = 0
+l.home_ownership.monthly_price = 0.0
+l.home_ownership.ownership_type = "none"
+
+l.credit_score = 650
+l.credit_history_month = 32
+l.delinquencies_in_2_years = 2
+l.open_credit_lines = 4
+l.total_credit_lines_count = 4
+l.revolving_credit_accounts_balance = 501
+l.revolving_credit_utilized_percent = 22
+l.recent_credit_inquiries = 1
+
+l.deferral_months = 0
+
+m = UpstartNetwork::LoanPricing::LoanModel.new(l)
+i = m.get_interest_rate(l.raising_amount)
+{'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
+
 # Playing around
 l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
