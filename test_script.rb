@@ -68,7 +68,7 @@ UpstartNetwork::LoanPricing::LoanModel.bb_simulation(file = '/home/viraj/upstart
                                                      num_people = 5)
 
 # Price BPS respondents
-UpstartNetwork::LoanPricing::LoanModel.bps_pricing(file = '/home/viraj/upstart/data/bps_test_cases/bps_test_cases.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/bps_people_output_location.csv', num_people = nil, bootcamp = false, credit_variation_list = [])
+UpstartNetwork::LoanPricing::LoanModel.bps_pricing(file = '/home/viraj/upstart/data/bps_test_cases/bps_test_cases.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/bps_people_output_location.csv', num_people = nil, bootcamp = false, commit = nil, credit_variation_list = [])
 
 # Simulate BPS respondents
 UpstartNetwork::LoanPricing::LoanModel.bps_simulation(file = '/home/viraj/upstart/data/bps_test_cases/bps_test_cases_for_simulation.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/bps_people_simulated.csv', num_people = nil)
