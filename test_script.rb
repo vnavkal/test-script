@@ -873,7 +873,7 @@ i = m.get_interest_rate(l.raising_amount)
 # Playing around
 l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
-job1 = UpstartNetwork::LoanPricing::Job.new(4500.0, Date.new(2013, 4, 1), nil, true)
+job1 = UpstartNetwork::LoanPricing::Job.new(50000.0 / 12.0, Date.new(2013, 4, 1), nil, true)
 job2 = UpstartNetwork::LoanPricing::Job.new(3500.0, Date.new(2011, 9, 3), Date.new(2013, 4, 1), false)
 l.jobs = [job1]#, job2]
 
@@ -883,28 +883,28 @@ l.job_offers = []#[job_offer]
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = nil
 
-l.student_sat_1600 = 1100
-l.school_sat_1600 = 1100
-l.college_gpa_4 = 3.0
+l.student_sat_1600 = 870
+l.school_sat_1600 = 1125
+l.college_gpa_4 = 3.71
 l.number_of_dependents = 0
-l.home_ownership.monthly_price = 1500
+l.home_ownership.monthly_price = 265
 l.home_ownership.ownership_type = "rent"
-l.undergrad_bb_major = 'Business'
+l.undergrad_bb_major = 'health professions'
 l.raising_amount = 5000
 
-l.open_credit_lines = 0
-l.total_monthly_debt_obligations = 700
+l.open_credit_lines = 9.29
+l.total_monthly_debt_obligations = 375
 l.revolving_credit_accounts_balance = 0
-l.revolving_credit_utilized_percent = 0
-l.credit_score = 750
-l.delinquencies_in_2_years = 0
-l.recent_credit_inquiries = 0
+l.revolving_credit_utilized_percent = 46.68
+l.credit_score = 714.27
+l.delinquencies_in_2_years = 0.1565
+l.recent_credit_inquiries = 1.324
 l.public_records_on_file = 0
 l.credit_history_month = 40
-l.use_of_funds = UpstartNetwork::UseOfFunds::CREDIT_CARD_REFINANCING
-l.total_credit_lines_count = 5
+l.use_of_funds = UpstartNetwork::UseOfFunds::OTHER
+l.total_credit_lines_count = 11
 l.deferral_months = 0
-l.college_grad_year = 2014
+l.college_grad_year = 2012
 
 m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.get_interest_rate(l.raising_amount).interest_rate_percent
