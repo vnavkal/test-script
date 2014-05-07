@@ -67,8 +67,11 @@ UpstartNetwork::LoanPricing::LoanModel.bb_simulation(file = '/home/viraj/upstart
                                                      output_file = '/home/viraj/upstart/data/bb_test_cases/bb_people_simulated.csv',
                                                      num_people = 5)
 
-# Price BPS respondents
-UpstartNetwork::LoanPricing::LoanModel.bps_pricing(file = '/home/viraj/upstart/data/bps_test_cases/bps_test_cases.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/bps_people_output_location.csv', num_people = nil, bootcamp = false, commit = nil, credit_variation_list = [])
+# Price BPS respondents with college degrees
+UpstartNetwork::LoanPricing::LoanModel.bps_pricing(file = '/home/viraj/upstart/data/bps_test_cases/bps_test_cases.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/bps_people_output_cb_functions_2.csv', num_people = nil, bootcamp = false, commit = '79f836ce45b95abb376adeead7e63892bb80280d', credit_variation_list = [])
+
+# Price BPS respondents without college degrees
+UpstartNetwork::LoanPricing::LoanModel.bps_pricing(file = '/home/viraj/upstart/data/bps_test_cases/only_non_bachelors.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/only_non_bachelors_output_cb.csv', num_people = nil, bootcamp = true, commit = '79f836ce45b95abb376adeead7e63892bb80280d', credit_variation_list = [])
 
 # Simulate BPS respondents
 UpstartNetwork::LoanPricing::LoanModel.bps_simulation(file = '/home/viraj/upstart/data/bps_test_cases/bps_test_cases_for_simulation.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/bps_people_simulated.csv', num_people = nil)
@@ -901,6 +904,47 @@ l.total_credit_lines_count = 3
 l.revolving_credit_accounts_balance = 6
 l.revolving_credit_utilized_percent = 0
 l.recent_credit_inquiries = 1
+
+l.deferral_months = 0
+
+m = UpstartNetwork::LoanPricing::LoanModel.new(l)
+i = m.get_interest_rate(l.raising_amount)
+{'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
+
+# Candidate 22: 18320
+l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+
+c = CodingBootcamp.where(use_for_pricing: true).first
+l.coding_bootcamp = nil
+
+l.raising_amount = 5000
+l.use_of_funds = UpstartNetwork::UseOfFunds::RELOCATION
+
+l.student_sat_1600 = 1220
+l.school_sat_1600 = 1051.0
+l.college_gpa_4 = 3.2
+l.undergrad_bb_major = :'social sciences'
+l.college_grad_year = 2013
+
+job1 = UpstartNetwork::LoanPricing::Job.new(60000.0 / 12.0, Date.new(2011, 9, 1), nil, true)
+l.jobs = []
+
+job_offer = UpstartNetwork::LoanPricing::JobOffer.new(60000 / 12.0, Date.new(2014, 6, 1))
+l.job_offers = []#[job_offer]
+
+l.number_of_dependents = 0
+l.total_monthly_debt_obligations = 145
+l.home_ownership.monthly_price = 0
+l.home_ownership.ownership_type = "none"
+
+l.credit_score = 650
+l.credit_history_month = 70
+l.delinquencies_in_2_years = 0
+l.open_credit_lines = 4
+l.total_credit_lines_count = 7
+l.revolving_credit_accounts_balance = 7632
+l.revolving_credit_utilized_percent = 69
+l.recent_credit_inquiries = 0
 
 l.deferral_months = 0
 
