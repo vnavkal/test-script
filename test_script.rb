@@ -930,7 +930,7 @@ job1 = UpstartNetwork::LoanPricing::Job.new(60000.0 / 12.0, Date.new(2011, 9, 1)
 l.jobs = []
 
 job_offer = UpstartNetwork::LoanPricing::JobOffer.new(60000 / 12.0, Date.new(2014, 6, 1))
-l.job_offers = []#[job_offer]
+l.job_offers = [job_offer]
 
 l.number_of_dependents = 0
 l.total_monthly_debt_obligations = 145
