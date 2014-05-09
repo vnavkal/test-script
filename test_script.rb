@@ -60,21 +60,24 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.get_interest_rate(5000)
 
 # Price B&B respondents
-UpstartNetwork::LoanPricing::LoanModel.bb_pricing(file = '/home/viraj/upstart/data/bb_test_cases/bb_people.csv', output_file = '/home/viraj/upstart/data/bb_test_cases/bb_people_output_m10def1-1d60s15n1btbgp8.csv', num_people = nil, bootcamp = true)
+UpstartNetwork::LoanPricing::LoanModel.bb_pricing(file = '/home/viraj/upstart/data/bb_test_cases/bb_people.csv', output_file = '/home/viraj/upstart/data/bb_test_cases/bb_people_output_m10def1-1d60s15n1btbgp8.csv', num_people = nil, bootcamp = true); nil
 
 # Simulate B&B respondents
 UpstartNetwork::LoanPricing::LoanModel.bb_simulation(file = '/home/viraj/upstart/data/bb_test_cases/bb_people_for_simulation.csv',
                                                      output_file = '/home/viraj/upstart/data/bb_test_cases/bb_people_simulated.csv',
-                                                     num_people = 5)
+                                                     num_people = 5); nil
 
 # Price BPS respondents with college degrees
-UpstartNetwork::LoanPricing::LoanModel.bps_pricing(file = '/home/viraj/upstart/data/bps_test_cases/bps_test_cases.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/bps_people_output_cb_functions_2.csv', num_people = nil, bootcamp = false, commit = '79f836ce45b95abb376adeead7e63892bb80280d', credit_variation_list = [])
+UpstartNetwork::LoanPricing::LoanModel.bps_pricing(file = '/home/viraj/upstart/data/bps_test_cases/bps_test_cases.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/bps_people_output_cb_functions_2.csv', num_people = nil, bootcamp = false, commit = '79f836ce45b95abb376adeead7e63892bb80280d', credit_variation_list = []); nil
 
 # Price BPS respondents without college degrees
-UpstartNetwork::LoanPricing::LoanModel.bps_pricing(file = '/home/viraj/upstart/data/bps_test_cases/only_non_bachelors.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/only_non_bachelors_output_cb.csv', num_people = nil, bootcamp = true, commit = '79f836ce45b95abb376adeead7e63892bb80280d', credit_variation_list = [])
+UpstartNetwork::LoanPricing::LoanModel.bps_pricing(file = '/home/viraj/upstart/data/bps_test_cases/only_non_bachelors.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/only_non_bachelors_output_cb.csv', num_people = nil, bootcamp = true, commit = '79f836ce45b95abb376adeead7e63892bb80280d', credit_variation_list = []); nil
 
 # Simulate BPS respondents
-UpstartNetwork::LoanPricing::LoanModel.bps_simulation(file = '/home/viraj/upstart/data/bps_test_cases/bps_test_cases_for_simulation.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/bps_people_simulated.csv', num_people = nil)
+UpstartNetwork::LoanPricing::LoanModel.bps_simulation(file = '/home/viraj/upstart/data/bps_test_cases/bps_test_cases_for_simulation.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/bps_people_simulated.csv', num_people = nil); nil
+
+# Price LC borrowers
+UpstartNetwork::LoanPricing::LoanModel.lc_pricing(file = '/home/viraj/upstart/data/lc_test_cases/lc_test_cases.csv', output_file = '/home/viraj/upstart/data/lc_test_cases/output_1.csv', num_people = nil, bootcamp = false, commit = '5f2789e973c37b9aba275a92791ae5edfab1796b'); nil
 
 m.write_simulation_arrays(5000, 20, '/home/viraj/upstart/data/simulation_arrays/', 'bootcamp')
 
@@ -734,7 +737,7 @@ l.college_gpa_4 = nil
 l.undergrad_bb_major = :'social sciences'
 l.college_grad_year = 2010
 
-job1 = UpstartNetwork::LoanPricing::Job.new(7000.0, Date.new(2013, 5, 1), nil, true)
+job1 = UpstartNetwork::LoanPricing::Job.new(6250.0, Date.new(2013, 5, 1), nil, true)
 l.jobs = [job1]
 
 l.number_of_dependents = 0
