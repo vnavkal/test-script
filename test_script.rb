@@ -728,7 +728,7 @@ l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerm
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = c
 
-l.raising_amount = 25000
+l.raising_amount = 5000
 l.use_of_funds = UpstartNetwork::UseOfFunds::CODING_BOOTCAMP
 
 l.student_sat_1600 = nil
@@ -737,7 +737,7 @@ l.college_gpa_4 = nil
 l.undergrad_bb_major = :'social sciences'
 l.college_grad_year = 2010
 
-job1 = UpstartNetwork::LoanPricing::Job.new(6250.0, Date.new(2013, 5, 1), nil, true)
+job1 = UpstartNetwork::LoanPricing::Job.new(6250.0, Date.new(2013, 3, 1), nil, true)
 l.jobs = [job1]
 
 l.number_of_dependents = 0
@@ -753,6 +753,7 @@ l.total_credit_lines_count = 25
 l.revolving_credit_accounts_balance = 19960
 l.revolving_credit_utilized_percent = 14
 l.recent_credit_inquiries = 4
+l.zip_code = 94107
 
 l.deferral_months = 0
 
