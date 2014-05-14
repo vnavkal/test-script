@@ -1,11 +1,11 @@
 u = Upstart.find(17649)
-manager = UpstartNetwork::AutomaticLoanPricingManager.new(u)
+manager = Loans::PricingManager.new(u)
 manager.pre_price
 t = FundingTermSetTemplate.all.find { |t| t.contract_type == UpstartNetwork::LoanTerms::CONTRACT_TYPE }
 t.enabled = true
 t.save!
 
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 monthly_compensation = 55000/12.0
 is_current = true
@@ -83,7 +83,7 @@ m.write_simulation_arrays(5000, 20, '/home/viraj/upstart/data/simulation_arrays/
 
 
 # Candidate 1
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 job1 = UpstartNetwork::LoanPricing::Job.new(4250.0, Date.new(2013, 5, 3), Date.new(2014, 4, 1), true)
 job2 = UpstartNetwork::LoanPricing::Job.new(2750.0, Date.new(2012, 9, 3), Date.new(2013, 5, 3), false)
@@ -120,7 +120,7 @@ m.get_interest_rate(l.raising_amount)
 
 # Candidate 2
 
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 job1 = UpstartNetwork::LoanPricing::Job.new(4250.0, Date.new(2013, 5, 3), Date.new(2014, 4, 1), true)
 job2 = UpstartNetwork::LoanPricing::Job.new(2750.0, Date.new(2012, 9, 3), Date.new(2013, 5, 3), false)
@@ -157,7 +157,7 @@ m.get_interest_rate(l.raising_amount)
 
 # Candidate 3
 
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 job1 = UpstartNetwork::LoanPricing::Job.new(5000.0, Date.new(2011, 1, 1), Date.new(2014, 1, 1), false)
 job2 = UpstartNetwork::LoanPricing::Job.new(2750.0, Date.new(2012, 9, 3), Date.new(2013, 5, 3), false)
@@ -194,7 +194,7 @@ m.get_interest_rate(l.raising_amount)
 
 # Candidate 4
 
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 job1 = UpstartNetwork::LoanPricing::Job.new(51252.0 / 12.0, Date.new(2011, 4, 1), Date.new(2014, 4, 1), true)
 job2 = UpstartNetwork::LoanPricing::Job.new(2750.0, Date.new(2012, 9, 3), Date.new(2013, 5, 3), false)
@@ -231,7 +231,7 @@ m.get_interest_rate(l.raising_amount)
 
 # Candidate 5
 
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 job1 = UpstartNetwork::LoanPricing::Job.new(0.0, Date.new(2013, 6, 1), nil, true)
 job2 = UpstartNetwork::LoanPricing::Job.new(2750.0, Date.new(2012, 9, 3), Date.new(2013, 5, 3), false)
@@ -268,7 +268,7 @@ m.get_interest_rate(l.raising_amount)
 
 # Candidate 6
 
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 job1 = UpstartNetwork::LoanPricing::Job.new(42000.0 / 12.0, Date.new(2012, 2, 1), nil, true)
 job2 = UpstartNetwork::LoanPricing::Job.new(19200.0 / 12.0, Date.new(2007, 10, 1), Date.new(2012,2,1), false)
@@ -305,7 +305,7 @@ m.get_interest_rate(l.raising_amount)
 
 # Candidate 7
 
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = c
@@ -343,7 +343,7 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.get_interest_rate(l.raising_amount)
 
 # Candidate 8: 17649
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = nil
@@ -381,7 +381,7 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.get_interest_rate(l.raising_amount)
 
 # Candidate 9: 17516
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = c
@@ -420,7 +420,7 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.get_interest_rate(l.raising_amount)
 
 # Candidate 10: 17485
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = nil
@@ -458,7 +458,7 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.get_interest_rate(l.raising_amount)
 
 # Candidate 11: 17471
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = c
@@ -495,7 +495,7 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.get_interest_rate(l.raising_amount)
 
 # Candidate 12: 17773
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = c
@@ -533,7 +533,7 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.get_interest_rate(l.raising_amount)
 
 # Candidate 13: Henry Harrison
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = c
@@ -570,7 +570,7 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.get_interest_rate(l.raising_amount)
 
 # Candidate 14: 17997
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = c
@@ -607,7 +607,7 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.get_interest_rate(l.raising_amount)
 
 # Candidate 14: 17997
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = c
@@ -645,7 +645,7 @@ i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
 # Candidate 15: 17405
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = c
@@ -684,7 +684,7 @@ i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
 # Candidate 16: 16325
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = nil
@@ -722,8 +722,8 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
-# Candidate 17: 18143
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+# Candidate 17: 18143, barely rejected
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = c
@@ -762,7 +762,7 @@ i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
 # Candidate 18: 18008
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = c
@@ -800,7 +800,7 @@ i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
 # Candidate 19: 17099
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = c
@@ -840,7 +840,7 @@ i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
 # Candidate 20: 17967
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = nil
@@ -878,7 +878,7 @@ i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
 # Candidate 21: 17420
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = c
@@ -916,7 +916,7 @@ i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
 # Candidate 22: 18320
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = nil
@@ -957,7 +957,7 @@ i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
 # Candidate 23: 17734
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = nil
@@ -997,8 +997,136 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
+# Candidate 24: 7993, triggered negative interest rate error
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+
+c = CodingBootcamp.where(use_for_pricing: true).first
+l.coding_bootcamp = nil
+
+l.raising_amount = 25000
+l.use_of_funds = UpstartNetwork::UseOfFunds::STUDENT_LOAN_REFINANCING
+
+l.student_sat_1600 = nil
+l.school_sat_1600 = 1087
+l.college_gpa_4 = 3.8
+l.undergrad_bb_major = :'social sciences'
+l.college_grad_year = 2012
+
+job1 = UpstartNetwork::LoanPricing::Job.new(6600.0, Date.new(2014, 4, 1), nil, true)
+job2 = UpstartNetwork::LoanPricing::Job.new(3600.0, Date.new(2012, 10, 1), Date.new(2014, 3, 1), false)
+l.jobs = [job1, job2]
+
+l.number_of_dependents = 1
+l.total_monthly_debt_obligations = 1901
+l.home_ownership.monthly_price = 1100.0
+l.home_ownership.ownership_type = "rent"
+
+l.credit_score = 674
+l.credit_history_month = 68
+l.delinquencies_in_2_years = 0
+l.open_credit_lines = 7
+l.total_credit_lines_count = 7
+l.revolving_credit_accounts_balance = 5034
+l.revolving_credit_utilized_percent = 63
+l.recent_credit_inquiries = 3
+l.zip_code = 90403
+
+l.deferral_months = 0
+
+m = UpstartNetwork::LoanPricing::LoanModel.new(l)
+i = m.get_interest_rate(l.raising_amount)
+{'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
+
+# Candidate 25: 16728, triggered negative interest rate error
+
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+
+c = CodingBootcamp.where(use_for_pricing: true).first
+l.coding_bootcamp = nil
+
+l.raising_amount = 25000
+l.use_of_funds = UpstartNetwork::UseOfFunds::STARTUP_OR_BUSINESS
+
+l.student_sat_1600 = nil
+l.school_sat_1600 = 1135
+l.college_gpa_4 = nil
+l.undergrad_bb_major = :'business'
+l.college_grad_year = 1991
+
+job1 = UpstartNetwork::LoanPricing::Job.new(5000.0, Date.new(2014, 4, 1), nil, true)
+job2 = UpstartNetwork::LoanPricing::Job.new(3600.0, Date.new(2012, 10, 1), Date.new(2014, 3, 1), false)
+l.jobs = [job1]
+
+l.number_of_dependents = 3
+l.total_monthly_debt_obligations = 0
+l.home_ownership.monthly_price = 1300.0
+l.home_ownership.ownership_type = "rent"
+
+l.credit_score = 708
+l.credit_history_month = 239
+l.delinquencies_in_2_years = 0
+l.open_credit_lines = 0
+l.total_credit_lines_count = 1
+l.revolving_credit_accounts_balance = 0
+l.revolving_credit_utilized_percent = 0
+l.recent_credit_inquiries = 0
+l.zip_code = 33178
+
+l.deferral_months = 0
+
+m = UpstartNetwork::LoanPricing::LoanModel.new(l)
+i = m.get_interest_rate(l.raising_amount)
+{'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
+
+# Candidate 26: 15420, triggered no implicit conversion from nil to integer error
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+
+c = CodingBootcamp.where(use_for_pricing: true).first
+l.coding_bootcamp = nil
+
+l.raising_amount = 25000
+l.use_of_funds = UpstartNetwork::UseOfFunds::STUDENT_LOAN_REFINANCING
+
+l.student_sat_1600 = nil
+l.school_sat_1600 = 989
+l.college_gpa_4 = nil
+l.undergrad_bb_major = :engineering
+l.college_grad_year = 2003
+
+job1 = UpstartNetwork::LoanPricing::Job.new(85000.0, Date.new(2013, 2, 1), nil, true)
+job2 = UpstartNetwork::LoanPricing::Job.new(3600.0, Date.new(2012, 10, 1), Date.new(2014, 3, 1), false)
+l.jobs = [job1]
+
+l.number_of_dependents = 0
+l.total_monthly_debt_obligations = 2642
+l.home_ownership.monthly_price = 1550.0
+l.home_ownership.ownership_type = "mortgage"
+
+l.credit_score = 792
+l.credit_history_month = 168
+l.delinquencies_in_2_years = 0
+l.open_credit_lines = 9
+l.total_credit_lines_count = 22
+l.revolving_credit_accounts_balance = 7034
+l.revolving_credit_utilized_percent = 7
+l.recent_credit_inquiries = 2
+l.zip_code = 3054
+
+l.deferral_months = 0
+
+m = UpstartNetwork::LoanPricing::LoanModel.new(l)
+i = m.get_interest_rate(l.raising_amount)
+{'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
+
+# Do this to reproduce the error
+10.times.each do
+m = UpstartNetwork::LoanPricing::LoanModel.new(l)
+i = m.get_interest_rate(m.get_maximum_loan_amount.to_i)
+{'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
+end
+
 # Playing around
-l = UpstartNetwork::LoanPricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 job1 = UpstartNetwork::LoanPricing::Job.new(50000.0 / 12.0, Date.new(2013, 4, 1), nil, true)
 job2 = UpstartNetwork::LoanPricing::Job.new(3500.0, Date.new(2011, 9, 3), Date.new(2013, 4, 1), false)
