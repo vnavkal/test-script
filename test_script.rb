@@ -229,11 +229,11 @@ l.college_grad_year = 2008
 m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.get_interest_rate(l.raising_amount)
 
-# Candidate 5
+# Candidate 5: 20112, Jess Heiner
 
 l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
-job1 = UpstartNetwork::LoanPricing::Job.new(0.0, Date.new(2013, 6, 1), nil, true)
+job1 = UpstartNetwork::LoanPricing::Job.new(3000.0, Date.new(2013, 6, 1), nil, true)
 job2 = UpstartNetwork::LoanPricing::Job.new(2750.0, Date.new(2012, 9, 3), Date.new(2013, 5, 3), false)
 l.jobs = [job1]
 
@@ -245,14 +245,14 @@ l.school_sat_1600 = 1373
 l.college_gpa_4 = nil
 l.number_of_dependents = 0
 l.home_ownership.monthly_price = 0.0
-l.home_ownership.ownership_type = "rent"
+l.home_ownership.ownership_type = "none"
 l.undergrad_bb_major = :humanities
-l.raising_amount = 11000
+l.raising_amount = 12000
 
 l.open_credit_lines = 3
 l.total_monthly_debt_obligations = 181
-l.revolving_credit_accounts_balance = 4855
-l.revolving_credit_utilized_percent = 7
+l.revolving_credit_accounts_balance = 8605
+l.revolving_credit_utilized_percent = 12
 l.credit_score = 730
 l.delinquencies_in_2_years = 0
 l.recent_credit_inquiries = 0
@@ -262,6 +262,7 @@ l.use_of_funds = UpstartNetwork::UseOfFunds::CODING_BOOTCAMP
 l.total_credit_lines_count = 6
 l.deferral_months = 0
 l.college_grad_year = 1998
+l.zip_code = 95959
 
 m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.get_interest_rate(l.raising_amount)
