@@ -1164,3 +1164,10 @@ l.college_grad_year = 2012
 
 m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.get_interest_rate(l.raising_amount).interest_rate_percent
+
+# Trade Account
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+t = UpstartNetwork::LoanPricing::TradeAccount.new(5000, Date.new(2014, 3, 24), Date.new(2012, 4, 24), 100, nil, 'I', 'AU')
+l.trade_account_hashes << t
+m = UpstartNetwork::LoanPricing::LoanModel.new(l)
+m.total_monthly_debt_obligations
