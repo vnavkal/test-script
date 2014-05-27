@@ -77,7 +77,7 @@ UpstartNetwork::LoanPricing::LoanModel.bps_pricing(file = '/home/viraj/upstart/d
 UpstartNetwork::LoanPricing::LoanModel.bps_simulation(file = '/home/viraj/upstart/data/bps_test_cases/bps_test_cases_for_simulation.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/bps_people_simulated.csv', num_people = nil); nil
 
 # Price LC borrowers
-UpstartNetwork::LoanPricing::LoanModel.lc_pricing(file = '/home/viraj/upstart/data/lc_test_cases/lc_test_cases.csv', output_file = '/home/viraj/upstart/data/lc_test_cases/output_1.csv', num_people = nil, bootcamp = false, commit = '5f2789e973c37b9aba275a92791ae5edfab1796b'); nil
+UpstartNetwork::LoanPricing::LoanModel.lc_pricing(file = '/home/viraj/upstart/data/lc_test_cases/training_set.csv', output_file = '/home/viraj/upstart/data/lc_test_cases/training_set_with_simulation.csv', num_people = 10, bootcamp = false, commit = 'd44aa11dd7ac7741d0b2b183ba160a6d8ed4b87f'); nil
 
 m.write_simulation_arrays(5000, 20, '/home/viraj/upstart/data/simulation_arrays/', 'bootcamp')
 
@@ -1079,7 +1079,7 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
-# Candidate 26: 15420, triggered no implicit conversion from nil to integer error
+# Candidate 26: (modified) 15420, triggered no implicit conversion from nil to integer error
 l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
 c = CodingBootcamp.where(use_for_pricing: true).first
@@ -1094,12 +1094,11 @@ l.college_gpa_4 = nil
 l.undergrad_bb_major = :engineering
 l.college_grad_year = 2003
 
-job1 = UpstartNetwork::LoanPricing::Job.new(85000.0, Date.new(2013, 2, 1), nil, true)
+job1 = UpstartNetwork::LoanPricing::Job.new(9500.0, Date.new(2013, 2, 1), nil, true)
 job2 = UpstartNetwork::LoanPricing::Job.new(3600.0, Date.new(2012, 10, 1), Date.new(2014, 3, 1), false)
 l.jobs = [job1]
 
 l.number_of_dependents = 0
-l.total_monthly_debt_obligations = 2642
 l.home_ownership.monthly_price = 1550.0
 l.home_ownership.ownership_type = "mortgage"
 
@@ -1108,7 +1107,6 @@ l.credit_history_month = 168
 l.delinquencies_in_2_years = 0
 l.open_credit_lines = 9
 l.total_credit_lines_count = 22
-l.revolving_credit_accounts_balance = 7034
 l.revolving_credit_utilized_percent = 7
 l.recent_credit_inquiries = 2
 l.zip_code = 3054
@@ -1116,6 +1114,48 @@ l.zip_code = 3054
 l.deferral_months = 0
 
 m = UpstartNetwork::LoanPricing::LoanModel.new(l)
+m.vars[:revolving_credit_accounts_balance] = 7034
+m.total_monthly_debt_obligations = 1642
+i = m.get_interest_rate(l.raising_amount)
+{'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
+
+# Candidate 26: 16712, triggered no implicit conversion from nil to integer error
+l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
+
+c = CodingBootcamp.where(use_for_pricing: true).first
+l.coding_bootcamp = nil
+
+l.raising_amount = 10000
+l.use_of_funds = UpstartNetwork::UseOfFunds::VACATION
+
+l.student_sat_1600 = nil
+l.school_sat_1600 = 1072
+l.college_gpa_4 = 3.4
+l.undergrad_bb_major = :biology
+l.college_grad_year = 2013
+
+job1 = UpstartNetwork::LoanPricing::Job.new(11760.0, 0, Date.new(2013, 2, 1), nil, true)
+job2 = UpstartNetwork::LoanPricing::Job.new(3600.0, 0, Date.new(2012, 10, 1), Date.new(2014, 3, 1), false)
+l.jobs = [job1]
+
+l.number_of_dependents = 0
+l.home_ownership.monthly_price = 0.0
+l.home_ownership.ownership_type = "none"
+
+l.credit_score = 510
+l.credit_history_month = 9 * 12
+l.delinquencies_in_2_years = 2
+l.open_credit_lines = 2
+l.total_credit_lines_count = 9
+l.revolving_credit_utilized_percent = 80
+l.recent_credit_inquiries = 0
+l.zip_code = -1
+
+l.deferral_months = 0
+
+m = UpstartNetwork::LoanPricing::LoanModel.new(l)
+m.vars[:revolving_credit_accounts_balance] = 9157
+m.total_monthly_debt_obligations = 403
 i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
@@ -1129,41 +1169,46 @@ end
 # Playing around
 l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
 
-job1 = UpstartNetwork::LoanPricing::Job.new(50000.0 / 12.0, Date.new(2013, 4, 1), nil, true)
-job2 = UpstartNetwork::LoanPricing::Job.new(3500.0, Date.new(2011, 9, 3), Date.new(2013, 4, 1), false)
-l.jobs = [job1]#, job2]
-
-job_offer = UpstartNetwork::LoanPricing::JobOffer.new(4000.0, Date.new(2014, 5, 1))
-l.job_offers = []#[job_offer]
-
 c = CodingBootcamp.where(use_for_pricing: true).first
 l.coding_bootcamp = nil
 
-l.student_sat_1600 = 870
-l.school_sat_1600 = 1125
-l.college_gpa_4 = 3.71
-l.number_of_dependents = 0
-l.home_ownership.monthly_price = 265
-l.home_ownership.ownership_type = "rent"
-l.undergrad_bb_major = 'health professions'
-l.raising_amount = 5000
+l.raising_amount = 25000
+l.use_of_funds = UpstartNetwork::UseOfFunds::STUDENT_LOAN_REFINANCING
 
-l.open_credit_lines = 9.29
-l.total_monthly_debt_obligations = 375
-l.revolving_credit_accounts_balance = 0
-l.revolving_credit_utilized_percent = 46.68
-l.credit_score = 714.27
-l.delinquencies_in_2_years = 0.1565
-l.recent_credit_inquiries = 1.324
-l.public_records_on_file = 0
-l.credit_history_month = 40
-l.use_of_funds = UpstartNetwork::UseOfFunds::OTHER
-l.total_credit_lines_count = 11
+l.student_sat_1600 = nil
+l.school_sat_1600 = 989
+l.college_gpa_4 = nil
+l.undergrad_bb_major = :engineering
+l.college_grad_year = 2003
+
+# job1 = UpstartNetwork::LoanPricing::Job.new(9500.0, Date.new(2013, 2, 1), nil, true)
+job1 = UpstartNetwork::LoanPricing::Job.new(60000.0, 0.0, Date.new(2013, 4, 1), nil, true)
+l.jobs = [job1]
+income_source = income_source = UpstartNetwork::LoanPricing::IncomeSource.new(54000, Date.new(2013, 4, 1))
+l.income_sources = [income_source]
+
+l.number_of_dependents = 0
+l.home_ownership.monthly_price = 1550.0
+l.home_ownership.ownership_type = "mortgage"
+t = UpstartNetwork::LoanPricing::TradeAccount.new(5000, Date.new(2014, 3, 24), Date.new(2012, 4, 24), 1000, nil, 'M', 'AU', 'I')
+l.trade_account_hashes << t
+
+l.credit_score = 792
+l.credit_history_month = 168
+l.delinquencies_in_2_years = 0
+l.open_credit_lines = 9
+l.total_credit_lines_count = 22
+l.revolving_credit_utilized_percent = 7
+l.recent_credit_inquiries = 2
+l.zip_code = 3054
+
 l.deferral_months = 0
-l.college_grad_year = 2012
 
 m = UpstartNetwork::LoanPricing::LoanModel.new(l)
-m.get_interest_rate(l.raising_amount).interest_rate_percent
+m.vars[:revolving_credit_accounts_balance] = 7034
+m.total_monthly_debt_obligations = 1642
+i = m.get_interest_rate(l.raising_amount)
+{'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
 # Trade Account
 l = Loans::PricingData.new_from_upstart(u, UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan))
