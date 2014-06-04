@@ -1,4 +1,4 @@
-u = Upstart.find(17649)
+u = Upstart.find(17640)
 manager = Loans::PricingManager.new(u)
 manager.pre_price
 t = FundingTermSetTemplate.all.find { |t| t.contract_type == UpstartNetwork::LoanTerms::CONTRACT_TYPE }
@@ -77,7 +77,15 @@ UpstartNetwork::LoanPricing::LoanModel.bps_pricing(file = '/home/viraj/upstart/d
 UpstartNetwork::LoanPricing::LoanModel.bps_simulation(file = '/home/viraj/upstart/data/bps_test_cases/bps_test_cases_for_simulation.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/bps_people_simulated.csv', num_people = nil); nil
 
 # Price LC borrowers
-UpstartNetwork::LoanPricing::LoanModel.lc_pricing(file = '/home/viraj/upstart/data/lc_test_cases/training_set.csv', output_file = '/home/viraj/upstart/data/lc_test_cases/training_set_with_simulation.csv', num_people = 10, bootcamp = false, commit = 'd44aa11dd7ac7741d0b2b183ba160a6d8ed4b87f'); nil
+UpstartNetwork::LoanPricing::LoanModel.lc_pricing(file = '/home/viraj/upstart_share/shared_data/lc_test_cases/training_set.csv', output_file = '/home/viraj/upstart_share/shared_data/lc_test_cases/training_set_with_simulation.csv', start = 0, finish = 10, bootcamp = false, commit = 'd44aa11dd7ac7741d0b2b183ba160a6d8ed4b87f'); nil
+
+# Price LC borrowers in chunks
+chunk_size = 50
+chunks = 200
+(0..chunks-1).each do |chunk|
+  puts "Beginning chunk #{chunk}..."
+  UpstartNetwork::LoanPricing::LoanModel.lc_pricing(file = '/home/viraj/upstart_share/shared_data/lc_test_cases/training_set.csv', output_file = '/home/viraj/upstart_share/shared_data/lc_test_cases/training_set_with_simulation_chunk_' + chunk.to_s + '.csv', start = chunks * chunk_size, finish = (chunks + 1) * chunk_size, bootcamp = false, commit = 'd44aa11dd7ac7741d0b2b183ba160a6d8ed4b87f'); nil
+end
 
 m.write_simulation_arrays(5000, 20, '/home/viraj/upstart/data/simulation_arrays/', 'bootcamp')
 
@@ -1184,7 +1192,7 @@ l.college_grad_year = 2003
 # job1 = UpstartNetwork::LoanPricing::Job.new(9500.0, Date.new(2013, 2, 1), nil, true)
 job1 = UpstartNetwork::LoanPricing::Job.new(60000.0, 0.0, Date.new(2013, 4, 1), nil, true)
 l.jobs = [job1]
-income_source = income_source = UpstartNetwork::LoanPricing::IncomeSource.new(54000, Date.new(2013, 4, 1))
+income_source = UpstartNetwork::LoanPricing::IncomeSource.new(54000, Date.new(2013, 4, 1))
 l.income_sources = [income_source]
 
 l.number_of_dependents = 0
@@ -1216,3 +1224,6 @@ t = UpstartNetwork::LoanPricing::TradeAccount.new(5000, Date.new(2014, 3, 24), D
 l.trade_account_hashes << t
 m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.total_monthly_debt_obligations
+
+# Test individual upstart from YAML dump
+pricing_data = YAML.load_file('/home/viraj/upstart_share/shared_data/production_tests/upstart_22934.yaml')
