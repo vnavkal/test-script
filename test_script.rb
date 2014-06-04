@@ -77,7 +77,7 @@ UpstartNetwork::LoanPricing::LoanModel.bps_pricing(file = '/home/viraj/upstart/d
 UpstartNetwork::LoanPricing::LoanModel.bps_simulation(file = '/home/viraj/upstart/data/bps_test_cases/bps_test_cases_for_simulation.csv', output_file = '/home/viraj/upstart/data/bps_test_cases/bps_people_simulated.csv', num_people = nil); nil
 
 # Price LC borrowers
-UpstartNetwork::LoanPricing::LoanModel.lc_pricing(file = '/home/viraj/upstart/data/lc_test_cases/training_set.csv', output_file = '/home/viraj/upstart/data/lc_test_cases/training_set_with_simulation.csv', num_people = 10, bootcamp = false, commit = 'd44aa11dd7ac7741d0b2b183ba160a6d8ed4b87f'); nil
+UpstartNetwork::LoanPricing::LoanModel.lc_pricing(file = '/home/viraj/upstart_share/shared_data/lc_test_cases/training_set.csv', output_file = '/home/viraj/upstart_share/shared_data/lc_test_cases/training_set_with_simulation.csv', num_people = 10, bootcamp = false, commit = '1d52d4e2d684403ccc19e4e7324aad68948b730d'); nil
 
 m.write_simulation_arrays(5000, 20, '/home/viraj/upstart/data/simulation_arrays/', 'bootcamp')
 
