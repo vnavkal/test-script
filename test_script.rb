@@ -87,7 +87,7 @@ chunks = 200
   UpstartNetwork::LoanPricing::LoanModel.lc_pricing(file = '/home/viraj/upstart_share/shared_data/lc_test_cases/training_set.csv', output_file = '/home/viraj/upstart_share/shared_data/lc_test_cases/training_set_with_simulation_chunk_' + chunk.to_s + '.csv', start = chunks * chunk_size, finish = (chunks + 1) * chunk_size, bootcamp = false, commit = 'd44aa11dd7ac7741d0b2b183ba160a6d8ed4b87f'); nil
 end
 
-m.write_simulation_arrays(5000, 20, '/home/viraj/upstart/data/simulation_arrays/', 'bootcamp')
+m.write_simulation_arrays(5000, 20, '/home/viraj/upstart_share/shared_data/simulation_arrays/', '23006')
 
 
 # Candidate 1
@@ -1214,7 +1214,6 @@ l.deferral_months = 0
 
 m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.vars[:revolving_credit_accounts_balance] = 7034
-m.total_monthly_debt_obligations = 1642
 i = m.get_interest_rate(l.raising_amount)
 {'interest rate' => i.interest_rate_percent, 'apr' => i.apr}
 
@@ -1226,4 +1225,8 @@ m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.total_monthly_debt_obligations
 
 # Test individual upstart from YAML dump
-pricing_data = YAML.load_file('/home/viraj/upstart_share/shared_data/production_tests/upstart_22934.yaml')
+l = YAML.load_file('/home/viraj/upstart_share/shared_data/production_tests/upstart_22934.yaml')
+l.rate_coefs_for_loan_amounts = nil
+l.rejected = nil
+
+# [-6.923491554907432e-08, 0.0015781235298402106, 6.911046610229292]
