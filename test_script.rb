@@ -1224,9 +1224,13 @@ l.trade_account_hashes << t
 m = UpstartNetwork::LoanPricing::LoanModel.new(l)
 m.total_monthly_debt_obligations
 
+# Visit upstart.com/admin/loan_pricing/data/<upstart_id>
+
 # Test individual upstart from YAML dump
+
 l = YAML.load_file('/home/viraj/upstart_share/shared_data/production_tests/upstart_22934.yaml')
 l.rate_coefs_for_loan_amounts = nil
 l.rejected = nil
 
-# [-6.923491554907432e-08, 0.0015781235298402106, 6.911046610229292]
+# Test all successfully priced upstarts
+# rake loan_model:run_test_pricing[/home/viraj/upstart_share/shared_data/production_tests/loan_data.yaml]
