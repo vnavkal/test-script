@@ -1189,10 +1189,11 @@ l.college_gpa_4 = nil
 l.undergrad_bb_major = :engineering
 l.college_grad_year = 2003
 
-# job1 = UpstartNetwork::LoanPricing::Job.new(9500.0, Date.new(2013, 2, 1), nil, true)
-job1 = UpstartNetwork::LoanPricing::Job.new(60000.0, 0.0, Date.new(2013, 4, 1), nil, true)
-l.jobs = [job1]
-income_source = UpstartNetwork::LoanPricing::IncomeSource.new(54000, Date.new(2013, 4, 1))
+job1 = UpstartNetwork::LoanPricing::Job.new(55000.0, 5000.0, Date.new(2013, 2, 1), Date.new(2013, 3, 1), false)
+job2 = UpstartNetwork::LoanPricing::Job.new(60000.0, 0.0, Date.new(2013, 4, 1), nil, true)
+job3 = UpstartNetwork::LoanPricing::Job.new(65000.0, 0.0, Date.new(2015, 4, 1), nil, true)
+l.jobs = [job1, job2, job3]
+income_source = UpstartNetwork::LoanPricing::IncomeSource.new(5400, Date.new(2013, 4, 1))
 l.income_sources = [income_source]
 
 l.number_of_dependents = 0
@@ -1231,6 +1232,11 @@ m.total_monthly_debt_obligations
 l = YAML.load_file('/home/viraj/upstart_share/shared_data/production_tests/upstart_22934.yaml')
 l.rate_coefs_for_loan_amounts = nil
 l.rejected = nil
+
+(1..10).to_a.map do
+m = UpstartNetwork::LoanPricing::LoanModel.new(l)
+m.get_interest_rate(19000).interest_rate_percent
+end
 
 # Test all successfully priced upstarts
 # rake loan_model:run_test_pricing[/home/viraj/upstart_share/shared_data/production_tests/loan_data.yaml]
