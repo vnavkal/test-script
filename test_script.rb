@@ -1240,3 +1240,6 @@ end
 
 # Test all successfully priced upstarts
 # rake loan_model:run_test_pricing[/home/viraj/upstart_share/shared_data/production_tests/loan_data.yaml]
+
+# Run full test of all successfully priced upstarts
+# rake loan_model:run_full_test_pricing[/home/viraj/upstart_share/shared_data/production_tests/loan_data.yaml]
