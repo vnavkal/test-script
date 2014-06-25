@@ -1229,7 +1229,7 @@ m.total_monthly_debt_obligations
 
 # Test individual upstart from YAML dump
 
-l = YAML.load_file('/home/viraj/upstart_share/shared_data/production_tests/upstart_22934.yaml')
+l = YAML.load_file('/home/viraj/upstart_share/shared_data/production_tests/upstart_24924.yaml')
 l.rate_coefs_for_loan_amounts = nil
 l.rejected = nil
 
