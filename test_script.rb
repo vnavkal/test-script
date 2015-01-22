@@ -1,4 +1,11 @@
+Loans
+Loans::PricingData
+UpstartNetwork::LoanPricing
+UpstartNetwork::LoanPricing::HomeOwnership
+UpstartNetwork::LoanPricing::TradeAccount
+
 l = YAML.load_file('/home/viraj/upstart_share/shared_data/production_tests/upstart_71989.yaml')
+l.default_prob_coefs_for_loan_amounts = nil
 l.rate_coefs_for_loan_amounts = nil
 l.rejected = nil
 
