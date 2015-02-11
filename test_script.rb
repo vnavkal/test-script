@@ -20,20 +20,21 @@ l.revolving_credit_utilized_percent += 100.0 * 7500 / l.total_revolving_limit
 l.bankcard_credit_utilized_percent += 100.0 * 7500 / l.total_bankcard_limit
 l.debt_available_for_refi += 7500
 
-srand(0)
+
 a = []
+errors = []
 i = 0
-Upstart.last(100).each do |upstart|
+Upstart.last(10).each do |upstart|
   puts "iteration #{i}"
   i += 1
+  runner = Loans::PricingRunner.new
   begin
-    terms = UpstartNetwork::LoanTerms.new(FundingTermSetTemplate.template_loan)
-    credit_report = upstart.normal_soft_credit_report
-    data = Loans::PricingData.new_from_upstart(upstart, terms, credit_report)
-    m = UpstartNetwork::LoanPricing::LoanModel.new(data)
-    a << m.get_interest_rate(data.raising_amount).interest_rate_percent
-  rescue
-    nil
+    data = Loans::PricingManager.new(upstart).build_loan_pricing_data(for_full_repricing: true)
+    srand(0)
+    result_store = runner.run_loan_pricing(data)
+    a << [upstart.id, result_store.interest_rate]
+  rescue => e
+    errors << [upstart.id, e.message]
   end
 end
 
